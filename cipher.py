@@ -196,6 +196,3 @@ def main():
 
 if __name__=='__main__':
 	main()
-#run cipher that was chosen
-#either encrypt or decrypt messaging depending input
-#print message for 
