@@ -7,9 +7,9 @@ encrypt_vs_decrypt = input('Would you prefer to encrypt or decrypt your desired 
   
    #"What cipher would you like to utilize?  #Show list of available ciphers
 chosen_variable = input('''What cipher would you like to utilize? \n 
-1.) For the Transposition cipher enter: "Transposition or T"
-2.) For the Atbash cipher enter: "Atbash or A" 
-3.) For the Polybius cipher enter: 'Polybius' \n
+For the Transposition cipher enter: "Transposition"
+For the Atbash cipher enter: "Atbash" 
+For the Polybius cipher enter: 'Polybius' \n
 >''')
 
 #if transpositino is selected, give option to enter key, otherwise make key = 0
@@ -44,10 +44,11 @@ polybius_square = {'a':'11', 'b':'12', 'c':'13', 'd':'14', 'e':'15',
 class Cipher():
  	"""create generic method/attributes that all ciphers utilize"""
 
- 	def __init__(self, personal_message, key):   #attributes?-->cipher name, key?
+ 	def __init__(self, personal_message, key):
+ 		'''initiate cipher instance and associated attributes'''
  		self.personal_message = personal_message
  		self.key = key
-  #create individual cipher class
+ 
 
 class TranspositionCipher(Cipher):
 	'''columnar cipher class that forms encrypted ciphertext
@@ -56,11 +57,12 @@ class TranspositionCipher(Cipher):
 	   the total character length of the message divided by 2
 	   '''
 	def __init__(self, personal_message, key):
+		'''initiate instance and associated attributes'''
 		super().__init__(personal_message, key)
 		self.ciphertext = ['']
 
 	def encrypt(self):
-		#encrypts personal message into ciphertext
+		'''encrypts personal message into ciphertext'''
 		self.key = int(key)
 		self.ciphertext = [''] * self.key
 
@@ -74,7 +76,7 @@ class TranspositionCipher(Cipher):
 		return encrypted_message
 
 	def decrypt(self):
-		#decrypt personal message into plaintext
+		'''decrypt personal message into plaintext'''
 		column_set = len(self.personal_message)/self.key  #get number of columns
 		column_set = math.ceil(column_set)
 		#get row vs columns
@@ -105,11 +107,12 @@ class AtbashCipher(Cipher):
 	   monoalphabetic substitution through the atbash dictionary
 	   '''
 	def __init__(self, personal_message, key ):
+		'''initiate instance and associated attributes'''
 		super().__init__(personal_message, key)
 		self.ciphertext = []
 
 	def encrypt(self):
-		#encrypts personal message into ciphertext
+		'''encrypts personal message into ciphertext'''
 		self.ciphertext = []
 		message_lower = self.personal_message.lower()
 		
@@ -123,7 +126,7 @@ class AtbashCipher(Cipher):
 		return encrypted_message
 
 	def decrypt(self):
-		#decrypts personal message into plaintext
+		'''ecrypts personal message into plaintext'''
 		plaintext = []
 		message_lower = self.personal_message.lower()
 		for value in message_lower:
@@ -144,11 +147,12 @@ class PolybiusCipher(Cipher):
 	   '''
 
 	def __init__(self, personal_message, key):
+		'''initiate instance and associated attributes'''
 		super().__init__(personal_message, key)
 		self.ciphertext = []
 
 	def encrypt(self):
-		#encrypts personal message into ciphertext
+		'''encrypts personal message into ciphertext'''
 		self.ciphertext = []
 		message_lower = self.personal_message.lower()
 		for let in message_lower:
@@ -161,7 +165,7 @@ class PolybiusCipher(Cipher):
 		return encrypted_message
 
 	def decrypt(self):
-		#decrypts personal message into plaintext
+		'''decrypts personal message into plaintext'''
 		encrypted_message_list = self.personal_message.split()
 		plaintext = ''
 		for number in encrypted_message_list:
@@ -174,6 +178,7 @@ class PolybiusCipher(Cipher):
 		return decrypted_message.title()
 
 def main():
+	'''runs if/elif statements with associated input questions'''
 	if chosen_variable.lower() == 'transposition':
 		trans_cipher = TranspositionCipher(personal_message, key)
 		if encrypt_vs_decrypt == "encrypt":
@@ -195,4 +200,5 @@ def main():
 			print(polybius_cipher.decrypt())
 
 if __name__=='__main__':
+	'''runs if name is main'''
 	main()
